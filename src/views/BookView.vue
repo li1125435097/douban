@@ -4,7 +4,7 @@
     <scroller title="最受关注图书｜非虚构类" type="hasCover" :items="reality"></scroller>
     <scroller title="豆瓣纸书" type="hasCover" :items="travel">
       <div class="promItem" slot="promItem">
-        <img class="corver" src="../assets/book_zw.jpg" alt="">
+        <img class="corver" src="http://101.37.161.245:9000/dev/assets/book_zw.jpg" alt="">
         <div class="content">
           <span class="price">¥ 68</span>
           <p class="name">造物</p>

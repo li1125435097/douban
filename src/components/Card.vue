@@ -2,7 +2,7 @@
   <div class="card">
     <div class="desc">
       <a href="#">
-        <img src="../assets/douban-app-logo.png" alt="">
+        <img src="http://101.37.161.245:9000/dev/assets/douban-app-logo.png" alt="">
       </a>
       <a href="#">
         <div class="user-info">

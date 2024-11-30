@@ -2,10 +2,10 @@
   <router-link class="user-bar" :to="{ name: currentLink}" tag="div">
     <div class="avatar">
       <template v-if="currentUser.name">
-        <img src="../assets/avatar.png" alt="avatar">
+        <img src="http://101.37.161.245:9000/dev/assets/avatar.png" alt="avatar">
       </template>
       <template v-else>
-        <img src="../assets/user_normal.jpg" alt="未登陆">
+        <img src="http://101.37.161.245:9000/dev/assets/user_normal.jpg" alt="未登陆">
       </template>
     </div>
     <div class="holder">{{holder}}</div>
@@ -90,11 +90,11 @@ export default {
   }
 
   .icon-camera::before {
-    background-image: url(../assets/camera.svg);
+    background-image: url(http://101.37.161.245:9000/dev/assets/camera.svg);
   }
 
   .icon-pen::before {
-    background-image: url(../assets/pen.svg);
+    background-image: url(http://101.37.161.245:9000/dev/assets/pen.svg);
   }
 
   &:before {

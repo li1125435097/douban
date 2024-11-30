@@ -8,6 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 var env = config.build.env
 
@@ -52,7 +53,12 @@ var webpackConfig = merge(baseWebpackConfig, {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
+        minifyCSS:true,
+        minifyJS:true,
+        minifyURLs:true,
+        removeEmptyAttributes:true,
+
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
@@ -86,7 +92,14 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    // PreloadWebpackPlugin 是一个webpack插件，用于自动为关键资源添加 <link rel="preload"> 标记。这告诉浏览器提前加载这些资源，从而有助于减少首次渲染的等待时间，并可能提高页面的整体性能。
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      // include: 指定要包含哪些资源。可以是 'initial'（只包含初始加载的资源），'all'（包含所有资源，包括异步加载的），或者是一个自定义的过滤器函数
+      include: 'initial', // 或者 'all'，根据你的需求来选择
+      fileBlacklist: [/\.map$/, /hot-update\.js$/], // 可选，排除不需要预加载的文件
+    })
   ]
 })
 

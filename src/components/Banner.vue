@@ -10,7 +10,7 @@
     <!-- Universal banner -->
     <template v-else>
       <div class="banner-bg">
-        <img src="../assets/promotion_bg.jpg" alt="cover">
+        <img src="http://101.37.161.245:9000/dev/assets/promotion_bg.jpg" alt="cover">
       </div>
       <div class="content">
         <span class="title">{{title}}</span>
