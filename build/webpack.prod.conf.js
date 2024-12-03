@@ -25,6 +25,28 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',       // 将所有类型的块都进行分割，包括异步块和非异步块
+      minSize: 20000,      // 块的最小尺寸，只有大于这个尺寸的块才会被分割
+      maxSize: 200000,     // 块的最大尺寸，大于这个尺寸的块会进一步被分割
+      minChunks: 1,        // 被多少入口点共享时才进行分割
+      maxAsyncRequests: 30, // 页面异步请求的最大数量
+      maxInitialRequests: 30, // 页面初始加载时最多可以请求的块的数量
+      automaticNameDelimiter: '~', // 文件名的分隔符
+      cacheGroups: { // 缓存组，可以自定义如何分割代码
+        vendors: {
+          test: /[\\/]node_modules[\\/]/, // 匹配 node_modules 目录
+          priority: -10 // 缓存组的优先级，数值越大优先级越高
+        },
+        default: {
+          minChunks: 2, // 至少被两个入口点共享时才进行分割
+          priority: -20, // 缓存组的优先级
+          reuseExistingChunk: true // 如果模块已经存在于分割的代码中，则复用该模块
+        }
+      }
+    }
+  },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
@@ -99,7 +121,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       // include: 指定要包含哪些资源。可以是 'initial'（只包含初始加载的资源），'all'（包含所有资源，包括异步加载的），或者是一个自定义的过滤器函数
       include: 'initial', // 或者 'all'，根据你的需求来选择
       fileBlacklist: [/\.map$/, /hot-update\.js$/], // 可选，排除不需要预加载的文件
-    })
+    }),
+    require('autoprefixer')
   ]
 })
 
